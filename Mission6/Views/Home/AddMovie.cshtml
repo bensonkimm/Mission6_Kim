@@ -1,0 +1,42 @@
+﻿@model Mission6.Models.Applications
+
+<h2>Add New Movie</h2>
+
+<form asp-action="AddMovie" method="post">
+    <div>
+        <label for="Title">Title</label>
+        <input type="text" id="Title" name="Title" asp-for="Title" />
+    </div>
+
+    <div>
+        <label for="Genre">Genre</label>
+        <input type="text" id="Genre" name="Genre" asp-for="Genre" />
+    </div>
+
+    <div>
+        <label for="Rating">Rating</label>
+        <select id="Rating" name="Rating" asp-for="Rating">
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="Edited">Edited</label>
+        <input type="checkbox" id="Edited" name="Edited" asp-for="Edited" />
+    </div>
+
+    <div>
+        <label for="LentTo">Lent To</label>
+        <input type="text" id="LentTo" name="LentTo" asp-for="LentTo" />
+    </div>
+
+    <div>
+        <label for="Notes">Notes</label>
+        <input type="text" id="Notes" name="Notes" asp-for="Notes" maxlength="25" />
+    </div>
+
+    <button type="submit">Add Movie</button>
+</form>
