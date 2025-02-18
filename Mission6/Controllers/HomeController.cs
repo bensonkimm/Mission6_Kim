@@ -24,6 +24,8 @@ namespace Mission6.Controllers
             return View("AddMovie");
         }
         [HttpPost]
+        //.Include(navigationPropertyPath x :Application => x.Movie)
+        //test
         public IActionResult AddMovie(Applications response)
         {
             _context.Movies.Add(response); //Add record
