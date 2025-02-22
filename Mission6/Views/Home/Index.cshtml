@@ -1,113 +1,41 @@
-﻿@{
-    ViewData["Title"] = "The Joel Hilton Film Collection"; // Requirement: Set the title of the home page
+﻿@model IEnumerable<Mission6.Models.Applications>
+
+@{
+    ViewData["Title"] = "Movie List";
 }
 
+<h2>Movie List</h2>
 
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Category</th> 
+            <th>Edited</th>
+            <th>Copied To Plex</th>
+            <th>Notes</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <!-- Add some basic CSS for styling -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Year</td>
+                <td>@(movie.Category != null ? movie.Category.CategoryName : "N/A")</td> <!-- Display Category -->
+                <td>@movie.Edited</td>
+                <td>@movie.CopiedToPlex</td>
+                <td>@movie.Notes</td>
+                <td>
+                    <a asp-action="EditMovie" asp-route-id="@movie.MovieId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="DeleteMovie" asp-route-id="@movie.MovieId" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
         }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
+</table>
 
-        h1 {
-            font-size: 2.5em;
-        }
-
-        img {
-            border-radius: 8px;
-            margin-top: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        nav {
-            background-color: #444;
-            padding: 10px 0;
-            text-align: center;
-        }
-
-            nav ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-            }
-
-                nav ul li {
-                    display: inline;
-                    margin: 0 15px;
-                }
-
-                    nav ul li a {
-                        color: white;
-                        text-decoration: none;
-                        font-weight: bold;
-                        padding: 10px 20px;
-                        background-color: #007bff;
-                        border-radius: 5px;
-                        transition: background-color 0.3s, transform 0.2s;
-                    }
-
-                        nav ul li a:hover {
-                            background-color: #0056b3; /* Darker shade for hover effect */
-                            transform: translateY(-2px); /* Slight upward motion on hover */
-                        }
-
-        section {
-            padding: 10px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1>The Joel Hilton Film Collection</h1>
-        <!-- Requirement: Display the only image of Joel Hilton found on the internet -->
-        <img src="JoelHiltonHeadshot.jpg" alt="Joel Hilton" width="300" />
-    </header>
-
-    <!-- Requirement: Shared navigation menu to each page on the site -->
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/Home/About">Get to Know Joel</a></li>
-            <li><a href="/Home/AddMovie">Add a Movie</a></li>
-        </ul>
-    </nav>
-
-    <section>
-        <h2>Welcome to the Joel Hilton Film Collection</h2>
-        <p>Welcome to the official website of the Joel Hilton Film Collection, a comprehensive archive dedicated to the incredible movies created by Joel Hilton. This collection includes a wide range of films across various genres, showcasing the talent and creativity that Joel brings to every project.</p>
-
-        <p>In this collection, you’ll find movies ranging from heart-pounding thrillers to heartwarming comedies. Whether you’re a fan of action-packed adventures, thought-provoking dramas, or lighthearted romantic comedies, there’s something here for everyone!</p>
-
-        <p>Stay tuned for more updates as we continue to grow and add more films to this exciting collection. You can also learn more about the man behind the films by visiting the "Get to Know Joel" page.</p>
-
-        <h3>Explore the Collection</h3>
-        <p>The Joel Hilton Film Collection is more than just a list of movies—it’s a journey through the artistry and vision of one of the most unique filmmakers of our time. Get to know Joel through his work, and discover the stories behind the camera.</p>
-
-        <h3>Contribute Your Thoughts</h3>
-        <p>If you’re passionate about film and want to contribute your thoughts or even add a movie to the collection, check out the "Add a Movie" page! We welcome contributions from all film enthusiasts.</p>
-    </section>
-
-</body>
-</html>
+<a asp-action="Create" class="btn btn-primary">Add New Movie</a>

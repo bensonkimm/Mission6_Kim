@@ -8,7 +8,7 @@ using Mission6.Models;
 
 namespace Mission6.Migrations
 {
-    [DbContext(typeof(Models.MovieDbContext))]
+    [DbContext(typeof(MovieDbContext))]
     partial class MovieDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -16,33 +16,27 @@ namespace Mission6.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.2");
 
-            modelBuilder.Entity("Mission6.Models.Movie", b =>
+            modelBuilder.Entity("Mission6.Models.Applications", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("CopiedToPlex")
+                        .HasColumnType("INTEGER");
+
                     b.Property<bool>("Edited")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Genre")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LentTo")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Notes")
-                        .HasMaxLength(25)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Rating")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("MovieId");
 
