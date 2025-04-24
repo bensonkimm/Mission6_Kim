@@ -2,41 +2,45 @@
 
 <h2>Add New Movie</h2>
 
-<form asp-action="AddMovie" method="post">
-    <div>
-        <label for="Title">Title</label>
-        <input type="text" id="Title" name="Title" asp-for="Title" />
+<form asp-action="AddMovie" method="post" class="row g-3">
+    <div class="col-md-6">
+        <label asp-for="Title" class="form-label">Title</label>
+        <input asp-for="Title" class="form-control" required />
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="Genre">Genre</label>
-        <input type="text" id="Genre" name="Genre" asp-for="Genre" />
+    <div class="col-md-6">
+        <label asp-for="Year" class="form-label">Year</label>
+        <input asp-for="Year" type="number" class="form-control" min="1888" required />
+        <span asp-validation-for="Year" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="Rating">Rating</label>
-        <select id="Rating" name="Rating" asp-for="Rating">
-            <option value="G">G</option>
-            <option value="PG">PG</option>
-            <option value="PG-13">PG-13</option>
-            <option value="R">R</option>
+    <!-- Category Dropdown -->
+    <div class="col-md-6">
+        <label asp-for="CategoryId" class="form-label">Category</label>
+        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(ViewBag.Categories, "CategoryId", "CategoryName"))">
+            <option value="">-- Select a Category --</option>
         </select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
 
-    <div>
-        <label for="Edited">Edited</label>
-        <input type="checkbox" id="Edited" name="Edited" asp-for="Edited" />
+    <div class="col-md-6 form-check">
+        <input asp-for="Edited" class="form-check-input" type="checkbox" />
+        <label asp-for="Edited" class="form-check-label">Edited</label>
     </div>
 
-    <div>
-        <label for="LentTo">Lent To</label>
-        <input type="text" id="LentTo" name="LentTo" asp-for="LentTo" />
+    <div class="col-md-6 form-check">
+        <input asp-for="CopiedToPlex" class="form-check-input" type="checkbox" />
+        <label asp-for="CopiedToPlex" class="form-check-label">Copied To Plex</label>
     </div>
 
-    <div>
-        <label for="Notes">Notes</label>
-        <input type="text" id="Notes" name="Notes" asp-for="Notes" maxlength="25" />
+    <div class="col-md-12">
+        <label asp-for="Notes" class="form-label">Notes</label>
+        <textarea asp-for="Notes" class="form-control" maxlength="25"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
 
-    <button type="submit">Add Movie</button>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Add Movie</button>
+    </div>
 </form>

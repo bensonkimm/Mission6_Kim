@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Mission6.Models
 {
@@ -8,24 +9,25 @@ namespace Mission6.Models
         public int MovieId { get; set; }
 
         [Required]
-        public required string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Required]
-        public required string Genre { get; set; }
+        [Range(1888, 2100, ErrorMessage = "Year must be at least 1888")]
+        public int Year { get; set; }
 
         [Required]
-        public required string Rating { get; set; }
+        public bool Edited { get; set; }
 
-        public bool Edited { get; set; } // No need to make this nullable
+        [Required]
+        public bool CopiedToPlex { get; set; }
 
-        public string? LentTo { get; set; } // Nullable field
+        public string? Notes { get; set; }
 
-        [StringLength(25)] // Limit Notes to 25 characters
-        public string? Notes { get; set; } // Nullable field
+        // Foreign Key for Category
+        [Required]
+        public int CategoryId { get; set; }
 
-        internal static void Add(Applications response)
-        {
-            throw new NotImplementedException();
-        }
+        [ForeignKey("CategoryId")]
+        public Category? Category { get; set; }
     }
 }
